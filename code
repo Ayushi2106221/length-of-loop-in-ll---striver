@@ -1,0 +1,38 @@
+Node* detectloop(struct Node *head){
+     Node *slow=head;
+     Node *fast=head;
+     while(fast){
+         fast=fast->next;
+         if(fast){
+             fast=fast->next;
+             }
+             slow=slow->next;
+             if(fast==slow){
+                 return slow;
+             }
+     }
+     return NULL;
+ }
+//Function to find the length of a loop in the linked list.
+int countNodesinLoop(struct Node *head)
+{
+    if(head==NULL)
+    return 0;
+    
+    Node *POI=detectloop(head);
+    if(POI==NULL) return 0;
+    Node *slow=head;
+    while(slow!=POI){
+        slow=slow->next;
+        POI=POI->next;
+    }
+    //after this loop slow will be starting pint of loop
+    Node *temp=slow;
+    int count=0;
+    while(temp->next!=slow){
+        temp=temp->next;
+        count++;
+    }
+    return count+1;
+    
+}
